@@ -91,8 +91,12 @@ namespace XYControl
                     {
                         string r_data;
                         r_data = sp.ReadLine(); //< j'obient la valeur ... 
-                        if (r_data.Equals("OK"))
+                        if (r_data.Contains("OK"))
+                        {
                             _Busy = false;
+                            Console.WriteLine("System is not busy anymore");
+                        }
+                           
                         Console.WriteLine(r_data);
                     }
                     catch ( System.TimeoutException e)
@@ -121,7 +125,7 @@ namespace XYControl
                         && !executionPaused)
                     {
                         _Busy = true;
-                        Console.WriteLine("Sending:" + msgQueue[0]);
+                        Console.WriteLine("Sending:" + msgQueue[0] + " Msg count# : " + msgQueue.Count);
                         sp.WriteLine(msgQueue[0]);
                         msgQueue.RemoveAt(0);
                     }
@@ -168,13 +172,13 @@ namespace XYControl
                 // 0 Lever le crayon
                 msgQueue.Add("M1 " + penUpValue.ToString());
                 // 1 aller a la position 0 de l'ensemble de points
-                msgQueue.Add("GO X" + lp[0].X + "Y" + lp[0].Y);
+                msgQueue.Add("G0 X" + lp[0].X + " Y" + lp[0].Y);
                 // 2 baisser le crayon
                 msgQueue.Add("M1 " + penDownValue.ToString());
                 for (int i = 1; i < lp.Count; i++)
                 {
                     // 4 se deplacer jusquau dernier point 
-                    msgQueue.Add("GO X" + lp[0].X + "Y" + lp[0].Y);
+                    msgQueue.Add("G0 X" + lp[i].X + " Y" + lp[i].Y);
                 }
                 // 4 lever le crayon  crayon
                 msgQueue.Add("M1 " + penUpValue.ToString());
@@ -188,13 +192,13 @@ namespace XYControl
                 // 0 Lever le crayon
                 msgQueue.Add("M1 " + penUpValue.ToString());
                 // 1 aller a la position 0 de l'ensemble de points
-                msgQueue.Add("GO X" + lp[0].X + "Y" + lp[0].Y);
+                msgQueue.Add("G0 X" + lp[0].X + " Y" + lp[0].Y);
                 // 2 baisser le crayon
                 msgQueue.Add("M1 " + penDownValue.ToString());
                 for (int i = 1; i < lp.Count; i++)
                 {
                     // 4 se deplacer jusquau dernier point 
-                    msgQueue.Add("GO X" + lp[0].X + "Y" + lp[0].Y);
+                    msgQueue.Add("G0 X" + lp[i].X + " Y" + lp[i].Y);
                 }
                 // 4 lever le crayon  crayon
                 msgQueue.Add("M1 " + penUpValue.ToString());

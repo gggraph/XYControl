@@ -210,8 +210,10 @@ namespace XYControlGUI
                 path.Concat(currentPath);
             }
             // We can also 
-            path.FlipY();
-            path.Multiply(PlotterDimension / VIEWSIZE);
+            //path.FlipY();
+            float upDim = (float)PlotterDimension / (float)VIEWSIZE;
+            Console.WriteLine("set size:" + upDim);
+            path.Multiply(upDim);
             return path;
         }
         public void DrawXYObject(List<XYObjectPath> objects)

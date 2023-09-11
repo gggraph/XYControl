@@ -141,7 +141,7 @@ namespace XYControlGUI
 
                     XYPath path = editor.DumpFullPath();
                     linesCounter = path.lineCount();
-                    //path.SaveAsBmp();
+                    path.SaveAsBmp();
                     COM.StartExecution(path);
                 }
                 ctrlMap.startButton.Text = "Pause";
